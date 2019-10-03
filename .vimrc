@@ -1,44 +1,54 @@
+"perl replace $
+autocmd BufNewFile,BufRead *.pl imap dl $
+"C++ compilation
+autocmd BufNewFile,BufRead *.cpp command! R execute! "!g++ -std=c++11 % -o /tmp/a.out && /tmp/a.out"
+autocmd BufNewFile,BufRead *.c command R execute "!gcc -std=c11 % -o /tmp/a.out && /tmp/a.out"
+"vim-slime Configuration
+let g:slime_target = "vimterminal"
+"Configuration of pahtogen
+execute pathogen#infect()
+filetype plugin indent on
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 let $LANG = 'en'
-"map TODO to td
-imap td TODO
+""map TODO to td
+"imap td TODO
 "Foler
 set fdm=indent
 "To relieve small finger's workload
-imap ;a A
-imap ;b B
-imap ;c C
-imap ;d D
-imap ;e E
-imap ;f F
-imap ;g G
-imap ;h H
-imap ;i I
-imap ;j J
-imap ;k K
-imap ;l L
-imap ;m M
-imap ;n N
-imap ;o O
-imap ;p P
-imap ;q Q
-imap ;r R
-imap ;s S
-imap ;t T
-imap ;u U
-imap ;v V
-imap ;w W
-imap ;x X
-imap ;y Y
-imap ;z Z
-imap ;- _
-imap ;+ =
-imap ;9 (
-imap ;0 )
-imap ;7 &
-imap ;[ {
-imap ;] }
+autocmd BufNewFile,BufRead *.tex imap ;a A
+autocmd BufNewFile,BufRead *.tex imap ;b B
+autocmd BufNewFile,BufRead *.tex imap ;c C
+autocmd BufNewFile,BufRead *.tex imap ;d D
+autocmd BufNewFile,BufRead *.tex imap ;e E
+autocmd BufNewFile,BufRead *.tex imap ;f F
+autocmd BufNewFile,BufRead *.tex imap ;g G
+autocmd BufNewFile,BufRead *.tex imap ;h H
+autocmd BufNewFile,BufRead *.tex imap ;i I
+autocmd BufNewFile,BufRead *.tex imap ;j J
+autocmd BufNewFile,BufRead *.tex imap ;k K
+autocmd bufnewfile,bufread *.tex imap ;l l
+autocmd BufNewFile,BufRead *.tex imap ;m M
+autocmd BufNewFile,BufRead *.tex imap ;n N
+autocmd BufNewFile,BufRead *.tex imap ;o O
+autocmd BufNewFile,BufRead *.tex imap ;p P
+autocmd BufNewFile,BufRead *.tex imap ;q Q
+autocmd BufNewFile,BufRead *.tex imap ;r R
+autocmd BufNewFile,BufRead *.tex imap ;s S
+autocmd BufNewFile,BufRead *.tex imap ;t T
+autocmd BufNewFile,BufRead *.tex imap ;u U
+autocmd BufNewFile,BufRead *.tex imap ;v V
+autocmd BufNewFile,BufRead *.tex imap ;w W
+autocmd BufNewFile,BufRead *.tex imap ;x X
+autocmd BufNewFile,BufRead *.tex imap ;y Y
+autocmd BufNewFile,BufRead *.tex imap ;z Z
+autocmd BufNewFile,BufRead *.tex imap ;- _
+autocmd BufNewFile,BufRead *.tex imap ;+ =
+autocmd BufNewFile,BufRead *.tex imap ;9 (
+autocmd BufNewFile,BufRead *.tex imap ;0 )
+autocmd BufNewFile,BufRead *.tex imap ;7 &
+autocmd BufNewFile,BufRead *.tex imap ;[ {
+autocmd BufNewFile,BufRead *.tex imap ;] }
 "When forget to sudo
 cmap sudowrite w !sudo tee >/dev/null %
 "set tagbar
@@ -57,6 +67,11 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+"use C++ in YouCompleteMe
+let g:syntastic_cpp_compiler='g++'
+let g:syntastic_cpp_compiler_options='-std=c++11'
+let g:syntastic_c_compiler='gcc'
+let g:syntastic_c_compiler_options='-std=c11'
 "let g:syntastic_echo_current_error = 1
 "let g:syntastic_error_symbol = "✗"
 "let g:syntastic_warning_symbol = "⚠"
@@ -102,13 +117,12 @@ syntax on
 set smartindent shiftwidth=4 
 set encoding=utf-8 
 inoremap <C-u> <esc>gUiwea
+let g:Tex_IgnoreLevel=3
 
 set fileencodings=utf-8,gbk,gb18030,gk2312 
-"½â¾ö²Ëµ¥ÂÒÂë 
-source $VIMRUNTIME/delmenu.vim 
-source $VIMRUNTIME/menu.vim 
-"½â¾öconsleÊä³öÂÒÂë 
-language messages zh_CN.utf-8 
+"source $VIMRUNTIME/delmenu.vim 
+"source $VIMRUNTIME/menu.vim 
+"language messages zh_CN.utf-8 
 let g:paredit_mode = 0
 let g:lisp_rainbow=1
 set laststatus=2
@@ -131,18 +145,27 @@ Plugin 'vim-latex/vim-latex'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'majutsushi/tagbar'
 Plugin 'dpelle/vim-LanguageTool'
+Plugin 'vim-airline/vim-airline'
+"Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Shougo/unite.vim'
+Plugin 'farseer90718/vim-taskwarrior'
+Plugin 'tpope/vim-fireplace'
+Plugin 'jpalardy/vim-slime'
 "Plugin 'vim-scripts/LanguageTool'
+Plugin 'rizzatti/dash.vim'
+Plugin 'jeaye/color_coded'
+Plugin 'chumakd/perlomni.vim'
+Plugin 'lervag/vimtex'
 call vundle#end()
 filetype plugin indent on
-
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif 
-"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>" 
-
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif  
+"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"   
 "inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 "inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 "inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 "inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-
+"
+"youcompleteme  默认tab  s-tab 和自动补全冲突
 let g:ycm_key_list_select_completion=['<c-n>']
 "let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion=['<c-p>']
@@ -150,8 +173,8 @@ let g:ycm_key_list_previous_completion=['<c-p>']
 let g:ycm_confirm_extra_conf=0 "关闭加载.ycm_extra_conf.py提示
 
 let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_min_num_of_chars_for_completion=2
-let g:ycm_cache_omnifunc=0 
+let g:ycm_min_num_of_chars_for_completion=2 
+let g:ycm_cache_omnifunc=0  
 let g:ycm_seed_identifiers_with_syntax=1
 nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>    "force recomile with syntastic
 "nnoremap <leader>lo :lopen<CR>    "open locationlist
@@ -162,3 +185,8 @@ let g:ycm_complete_in_strings = 1
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
 
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR> 
+"force semantic completion
+let g:ycm_semantic_triggers =  {
+			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+			\ 'cs,lua,javascript': ['re!\w{2}'],
+			\ }
